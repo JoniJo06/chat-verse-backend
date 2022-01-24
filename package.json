@@ -1,0 +1,30 @@
+{
+  "name": "chat-verse-backend",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoniJo06/chat-verse-backend.git"
+  },
+  "keywords": [
+    "messanger"
+  ],
+  "author": "jonas tobias",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JoniJo06/chat-verse-backend/issues"
+  },
+  "homepage": "https://github.com/JoniJo06/chat-verse-backend#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^14.2.0",
+    "express": "^4.17.2",
+    "mongoose": "^6.1.7"
+  }
+}
