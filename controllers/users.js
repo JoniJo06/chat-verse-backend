@@ -33,6 +33,7 @@ export const signUp = async (req, res) => {
 };
 
 export const logIn = async (req, res) => {
+  console.log('hi')
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
@@ -42,7 +43,7 @@ export const logIn = async (req, res) => {
         const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
           expiresIn: "2h",
         });
-        res.status(200).json({token: token, status: newUser.status});
+        res.status(200).json({token: token, status: user.status});
       } else {
         res.status(403).json("login data incorrect!");
       }
