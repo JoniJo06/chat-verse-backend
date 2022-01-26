@@ -1,13 +1,22 @@
-import 'dotenv/config';
-import express from 'express';
+import "dotenv/config.js";
+import express from "express";
+import "./db/mongoose.js";
+import users from "./routes/users.js";
+import protectedRoute from "./routes/protected.js"
 import cors from 'cors';
 
 const app = express();
-const port = process.env.PORT || 5001;
-app.use(express.json())
-app.use(cors());
+const port = process.env.PORT || 5005;
 
-app.get('/', (req, res) => {
-    res.send("hi");
-})
-app.listen(port => console.log("listen on port " + port));
+app.use(cors())
+app.use(express.json());
+app.use("/user", users);
+app.use("/info", protectedRoute);
+
+app.get("/", (req, res) => {
+    res.send("<h1>Chatverse Backend</h1>");
+});
+
+app.listen(port, () =>
+  console.log(`Server listening on port ${port}`)
+);
