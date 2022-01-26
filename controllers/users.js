@@ -57,3 +57,12 @@ export const getUserInfo = async (req, res) => {
     res.status(500).json(error.message);
   }
 };
+
+export const getAllUsers = async (req,res) => {
+  try {
+    const users = await User.find({});
+    res.send(users);
+  } catch (error){
+    res.status(500).json(error.message)
+  }
+}
