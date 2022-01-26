@@ -1,4 +1,4 @@
-import singleMessage from '../models/singleMessage.js';
+import singleMessage from '../models/SingleMessage.js';
 
 
 export const createSingleMessage = async (req, res) => {
