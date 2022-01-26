@@ -4,7 +4,15 @@ import jwt from "jsonwebtoken";
 
 export const signUp = async (req, res) => {
   try {
-    const { email, password, username, first_name, last_name, gender, birthday } = req.body;
+    const {
+      email,
+      password,
+      username,
+      first_name,
+      last_name,
+      gender,
+      birthday,
+    } = req.body;
     const hashedPassword = await bcrypt.hash(password, 5);
     const newUser = await User.create({
       email,
@@ -12,14 +20,12 @@ export const signUp = async (req, res) => {
       username,
       first_name,
       last_name,
-      gender, 
-      birthday
+      gender,
+      birthday,
     });
-    const token = jwt.sign(
-      { username: newUser.username },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
-    );
+    const token = jwt.sign({ _id: newUser._id }, process.env.JWT_SECRET, {
+      expiresIn: "2h",
+    });
     res.status(201).json(token);
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -33,8 +39,8 @@ export const logIn = async (req, res) => {
     if (user) {
       const matched = await bcrypt.compare(password, user.password);
       if (matched) {
-        const token = jwt.sign({ username }, process.env.JWT_SECRET, {
-          expiresIn: "3h",
+        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+          expiresIn: "2h",
         });
         res.status(200).json(token);
       } else {
@@ -58,11 +64,33 @@ export const getUserInfo = async (req, res) => {
   }
 };
 
-export const getAllUsers = async (req,res) => {
+export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find({});
     res.send(users);
-  } catch (error){
-    res.status(500).json(error.message)
+  } catch (error) {
+    res.status(500).json(error.message);
   }
-}
+};
+
+export const getAllActiveChats = async (req, res) => {
+  try {
+    const { _id } = req.body;
+    const user = await User.findById(_id);
+    res.status(200).json({ chats: user.chats });
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
+export const getUserChatDataById = async (req, res) => {
+  try {
+    const { _id } = req.body;
+    const user = await User.findById({ _id });
+    res
+      .status(200)
+      .json({ username: user.username, profile_pic: user.profile_pic });
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
