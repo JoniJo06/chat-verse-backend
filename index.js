@@ -9,7 +9,7 @@ const port = process.env.PORT || 5005;
 
 app.use(cors())
 app.use(express.json());
-app.use("/user", users);
+app.use("/users", users);
 
 app.get("/", (req, res) => {
     res.send("<h1>Chatverse Backend</h1>");
