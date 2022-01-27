@@ -23,7 +23,7 @@ export const signUp = async (req, res) => {
       gender,
       birthday,
     });
-    const token = jwt.sign({ _id: newUser._id }, process.env.JWT_SECRET, {
+    const token = await jwt.sign({ _id: newUser._id }, process.env.JWT_SECRET, {
       expiresIn: "2h",
     });
     res.status(201).json({token: token, status: newUser.status});
@@ -42,7 +42,7 @@ export const logIn = async (req, res) => {
         const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
           expiresIn: "2h",
         });
-        res.status(200).json({token: token, status: newUser.status});
+        res.status(200).json({token: token, status: user.status});
       } else {
         res.status(403).json("login data incorrect!");
       }
