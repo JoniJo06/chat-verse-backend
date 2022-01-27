@@ -1,5 +1,5 @@
 import express from "express";
-import { logIn, signUp,getUserInfo, getAllUsers, getUserChatDataById, getAllActiveChats } from "../controllers/users.js";
+import { logIn, signUp, getAllUsers, getUserChatDataById, getAllActiveChats } from "../controllers/users.js";
 import { verifyToken } from "../middlewares/verifyToken.js";
 const users = express.Router();
 

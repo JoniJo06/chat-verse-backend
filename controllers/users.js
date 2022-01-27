@@ -54,6 +54,8 @@ export const logIn = async (req, res) => {
   }
 };
 
+
+
 export const getUserInfo = async (req, res) => {
   try {
     const username = req.user;
