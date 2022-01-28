@@ -5,12 +5,12 @@ import users from "./routes/users.js";
 import chats from "./routes/chats.js";
 import singleMessages from "./routes/singleMessages.js";
 import cors from 'cors';
-import * as http from 'http';
+// import * as http from 'http';
 
 const app = express();
 const port = process.env.PORT || 5005;
-const socketport = process.env.PORT || 5006;
-const server = http.createServer(app);
+// const socketport = process.env.PORT || 5006;
+// const server = http.createServer(app);
 
 
 app.use(cors())
@@ -41,11 +41,11 @@ app.listen(port, () =>
 
 
 
-//Websocket
-app.get("/socket", (req, res) => {
-  res.send("<h1>Chatverse Backend Socket</h1>");
-});
+// //Websocket
+// app.get("/socket", (req, res) => {
+//   res.send("<h1>Chatverse Backend Socket</h1>");
+// });
 
-server.listen(socketport, () => {
-  console.log(`Websocket listening on port ${socketport}`)
-});
+// server.listen(socketport, () => {
+//   console.log(`Websocket listening on port ${socketport}`)
+// });
