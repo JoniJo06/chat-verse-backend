@@ -5,14 +5,13 @@ import users from "./routes/users.js";
 import chats from "./routes/chats.js";
 import singleMessages from "./routes/singleMessages.js";
 import cors from 'cors';
-import WebSocket from 'ws';
 
+// import * as http from 'http';
 
 const app = express();
 const port = process.env.PORT || 5005;
-const ws = new WebSocket('ws://www.host.com/path');
-
-
+// const socketport = process.env.PORT || 5006;
+// const server = http.createServer(app);
 
 
 app.use(cors())
