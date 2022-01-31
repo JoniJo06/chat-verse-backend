@@ -5,12 +5,14 @@ import users from "./routes/users.js";
 import chats from "./routes/chats.js";
 import singleMessages from "./routes/singleMessages.js";
 import cors from 'cors';
-import * as http from 'http';
+import WebSocket from 'ws';
+
 
 const app = express();
 const port = process.env.PORT || 5005;
-const socketport = process.env.PORT || 5006;
-const server = http.createServer(app);
+const ws = new WebSocket('ws://www.host.com/path');
+
+
 
 
 app.use(cors())
@@ -20,14 +22,13 @@ app.use('/chats', chats);
 app.use('/singlemessages', singleMessages);
 
 
-// io.on('connection', (socket) => {
-//   console.log('a user connected');
+ws.on('open', function open() {
+  ws.send('something');
+});
 
-//   socket.on('message', (message) =>     {
-//       console.log(message);
-//       io.emit('message', `${socket.id.substr(0,2)} said ${message}` );   
-//   });
-// });
+ws.on('message', function message(data) {
+  console.log('received: %s', data);
+});
 
 
 //API
@@ -38,14 +39,3 @@ app.get("/", (req, res) => {
 app.listen(port, () =>
   console.log(`Server1 listening on port ${port}`)
 );
-
-
-
-//Websocket
-app.get("/socket", (req, res) => {
-  res.send("<h1>Chatverse Backend Socket</h1>");
-});
-
-server.listen(socketport, () => {
-  console.log(`Websocket listening on port ${socketport}`)
-});
