@@ -3,10 +3,11 @@ import singleMessage from '../models/SingleMessage.js';
 
 export const createSingleMessage = async (req, res) => {
     try {
-        const { message, chat_id, creator} = req.body;
-        const newMessage = await singleMessage.create({message, chat_id, creator})
+        const { message, chat_id, creator, timestamp,read_status } = req.body.message;
+        const newMessage = await singleMessage.create({message, chat_id, creator, timestamp, read_status})
         res.status(201).json(newMessage)
     } catch (error){
+        // console.log(error)
         res.status(500).json({error: error.message})
       }
 }
@@ -19,6 +20,7 @@ export const getMessagesByChatId = async (req, res) => {
         const messages = await singleMessage.find({chat_id: _id})
         res.status(200).json(messages)
     } catch (error){
+
         res.status(500).json({error: error.message})
       }
 }

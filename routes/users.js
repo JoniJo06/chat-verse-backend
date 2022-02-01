@@ -6,8 +6,8 @@ const users = express.Router();
 users.post("/signup", signUp);
 users.post("/login", logIn);
 users.route('/').get(getAllUsers)
-users.get('/chatdatabyid', verifyToken, getUserChatDataById)
-users.get('/allactivechats', verifyToken, getAllActiveChats)
+users.get('/chat-data-by-id', verifyToken, getUserChatDataById)
+users.get('/all-active-chats', verifyToken, getAllActiveChats)
 
 export default users;
 

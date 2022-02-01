@@ -5,8 +5,8 @@ const singleMessageSchema = new Schema({
   message: { type: String, required: true },
   chat_id: { type: String, required: true },
   creator: { type: String, required: true},
-  timestamp: {type: Number, default: Date.now() },
-  read_status: { type: Boolean, default: false }
+  timestamp: {type: Number, required:true },
+  read_status: { type: Boolean, required:true }
 });
 
 export default model("SingleMessage", singleMessageSchema);
