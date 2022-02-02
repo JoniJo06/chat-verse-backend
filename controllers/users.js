@@ -26,7 +26,9 @@ export const signUp = async (req, res) => {
     const token = await jwt.sign({ _id: newUser._id }, process.env.JWT_SECRET, {
       expiresIn: "2h",
     });
-    res.status(201).json({token: token, status: newUser.status, _id: newUser._id});
+    res
+      .status(201)
+      .json({ token: token, status: newUser.status, _id: newUser._id });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -42,7 +44,9 @@ export const logIn = async (req, res) => {
         const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
           expiresIn: "2h",
         });
-        res.status(200).json({token: token, status: user.status, _id: user._id});
+        res
+          .status(200)
+          .json({ token: token, status: user.status, _id: user._id });
       } else {
         res.status(403).json("login data incorrect!");
       }
@@ -53,8 +57,6 @@ export const logIn = async (req, res) => {
     res.status(500).json(error.message);
   }
 };
-
-
 
 export const getUserInfo = async (req, res) => {
   try {
@@ -92,6 +94,16 @@ export const getUserChatDataById = async (req, res) => {
     res
       .status(200)
       .json({ username: user.username, profile_pic: user.profile_pic });
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
+export const getAllFriends = async (req, res) => {
+  try {
+    const { _id } = req.body;
+    const user = await User.findById({ _id });
+    res.status(200).json({ friends: user.friends });
   } catch (error) {
     res.status(500).json(error.message);
   }
