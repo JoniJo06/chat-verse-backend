@@ -6,7 +6,9 @@ import {
   getUserChatDataById,
   getAllActiveChats,
   getAllFriends,
-  sendFriendRequest
+  sendFriendRequest,
+  acceptFriendRequest,
+  getAllFriendRequests
 } from "../controllers/users.js";
 import { verifyToken } from "../middlewares/verifyToken.js";
 const users = express.Router();
@@ -17,7 +19,9 @@ users.route('/').get(getAllUsers)
 users.get('/chat-data-by-id', verifyToken, getUserChatDataById)
 users.get('/all-active-chats', verifyToken, getAllActiveChats)
 users.get('/friends', verifyToken, getAllFriends)
-users.get('/friends/request/:user_id', verifyToken, sendFriendRequest)
+users.get('/friends/requests/:user_id', verifyToken, sendFriendRequest)
+users.get('/friends/requests/accept/:user_id', verifyToken, acceptFriendRequest)
+users.get('/friends/requests', verifyToken, getAllFriendRequests)
 
 export default users;
 
