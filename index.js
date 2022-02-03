@@ -4,6 +4,7 @@ import "./db/mongoose.js";
 import users from "./routes/users.js";
 import chats from "./routes/chats.js";
 import singleMessages from "./routes/singleMessages.js";
+import search from './routes/search.js'
 import cors from 'cors';
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use("/users", users);
 app.use('/chats', chats);
 app.use('/single-messages', singleMessages);
+app.use('/search', search)
 
 
 
