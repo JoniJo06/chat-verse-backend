@@ -4,16 +4,21 @@ export const mainSearch = async (req,res) => {
   try{
 
   const {search, type} = req.query
-  const regexAll = new RegExp(String.raw`(.*${search}.*\w)+`)
+  const regexAll = new RegExp(String.raw`(.{0,}${search}.{0,}\b)`)
     if(type === 'user'){
-    const regexSingle = new RegExp(String.raw`${search}\b`)
+    const regexSingle = new RegExp(String.raw`\b.{0,0}${search}\b`)
 
       const users = await User.find({username: {$regex: regexAll, $options: 'gim'}, public: true, active:true}, 'username profile_pic')
       try{
         const user = await User.findOne({username: {$regex: regexSingle, $options: 'gi'}, public: true, active: true}, 'username profile_pic')
-        res.status(200).send({user:user,users: users})
-      }catch{
-      res.status(200).send()
+        const temp = [...users]
+        const usersFormatted = temp.filter((el)=>{
+          return el.username !== user.username
+        })
+        // console.log(index)
+        res.status(200).json({user:user,users: usersFormatted})
+      }catch (err){
+      res.status(200).json({users: users})
       }
     }
   } catch (err){
