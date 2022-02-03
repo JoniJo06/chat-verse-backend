@@ -18,6 +18,7 @@ const userSchema = new Schema({
   slogan: { type: String, default: 'Hallo, ich benutze Chatverse!' },
   friends: [{ type: String }],
   friend_requests: [{ type: String }],
+  pending_friend_requests: [{type: String}],
   blacklist: [{ type: String }],
   groups: [{ type: String }],
   chats: [{ type: String }],
