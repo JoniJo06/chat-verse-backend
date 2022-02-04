@@ -8,7 +8,7 @@ export const mainSearch = async (req,res) => {
     if(type === 'user'){
     const regexSingle = new RegExp(String.raw`\b.{0,0}${search}\b`)
 
-      const users = await User.find({username: {$regex: regexAll, $options: 'gim'}, public: true, active:true}, 'username profile_pic')
+      const users = await User.find({username: {$regex: regexAll, $options: 'gim'}, public: true, active:true}, 'username profile_pic', {limit: 10})
       try{
         const user = await User.findOne({username: {$regex: regexSingle, $options: 'gi'}, public: true, active: true}, 'username profile_pic')
         const temp = [...users]
