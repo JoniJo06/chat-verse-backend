@@ -265,3 +265,15 @@ export const togglePublic = async (req, res) => {
     res.status(500).json(err.message);
   }
 };
+
+
+export const getProfileInfo = async (req, res) => {
+  try {
+    const { _id } = req.body;
+    const user = await User.findById(_id, 'first_name last_name public username profile_pic email phone slogan');
+    res.status(200).json(user)
+    
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+};
