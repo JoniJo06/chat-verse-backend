@@ -8,7 +8,8 @@ import {
   getAllFriends,
   sendFriendRequest,
   acceptFriendRequest,
-  getAllFriendRequests
+  getAllFriendRequests,
+  togglePublic
 } from "../controllers/users.js";
 import { verifyToken } from "../middlewares/verifyToken.js";
 const users = express.Router();
@@ -22,6 +23,7 @@ users.get('/friends', verifyToken, getAllFriends)
 users.get('/friends/requests/:user_id', verifyToken, sendFriendRequest)
 users.get('/friends/requests/accept/:user_id', verifyToken, acceptFriendRequest)
 users.get('/friends/requests', verifyToken, getAllFriendRequests)
+users.get('/profile/toggle-public', verifyToken, togglePublic)
 
 export default users;
 
