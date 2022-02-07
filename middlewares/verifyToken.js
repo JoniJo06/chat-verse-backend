@@ -5,7 +5,7 @@ export const verifyToken = (req, res, next) => {
   if (jwt_token) {
     const { _id } = jwt.verify(jwt_token, process.env.JWT_SECRET);
     if (_id) {
-      req.body = {_id: _id};
+      req.body = {...req.body,_id: _id};
       next();
     } else {
       res.status(401).json("Unauthorized");
