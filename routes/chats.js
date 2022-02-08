@@ -4,7 +4,7 @@ import { verifyToken } from "../middlewares/verifyToken.js";
 
 const chats = express.Router();
 
-chats.post('/:user_id', verifyToken, createChat)
+chats.get('/:user_id/create', verifyToken, createChat)
 chats.get('/:chat_id', verifyToken, getChatById)
 chats.get('/:chat_id/info', verifyToken, getChatInfoById)
 

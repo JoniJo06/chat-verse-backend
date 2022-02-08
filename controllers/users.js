@@ -10,8 +10,8 @@ export const signUp = async (req, res) => {
       username,
       first_name,
       last_name,
-      gender,
-      birthday,
+      // gender,
+      // birthday,
     } = req.body;
     const hashedPassword = await bcrypt.hash(password, 5);
     const newUser = await User.create({
@@ -20,8 +20,8 @@ export const signUp = async (req, res) => {
       username,
       first_name,
       last_name,
-      gender,
-      birthday,
+      // gender,
+      // birthday,
     });
     const token = await jwt.sign({_id: newUser._id}, process.env.JWT_SECRET, {
       expiresIn: "2h",
@@ -98,6 +98,17 @@ export const getUserChatDataById = async (req, res) => {
     res.status(500).json(error.message);
   }
 };
+
+export const getFriendsForChatList = async (req,res) => {
+  try {
+    const {_id} = req.body;
+    const {friends} = await User.findById(_id, 'friends')
+    const friendsInfo = await User.find({_id: {$in:friends}},'profile_pic username')
+    res.status(200).json(friendsInfo)
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+}
 
 export const getAllFriends = async (req, res) => {
   try {

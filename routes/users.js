@@ -17,7 +17,8 @@ import {
   cancelPendingFriendRequest,
   removeFriend,
   addToBlacklist,
-  removeFromBlacklist
+  removeFromBlacklist,
+  getFriendsForChatList
 } from "../controllers/users.js";
 import { verifyToken } from "../middlewares/verifyToken.js";
 import {reject} from "bcrypt/promises.js";
@@ -37,6 +38,7 @@ users.get('/friends/remove/:user_id', verifyToken, removeFriend)
 users.get('/friends/blacklist/add/:user_id', verifyToken, addToBlacklist)
 users.get('/friends/blacklist/remove/:user_id', verifyToken, removeFromBlacklist)
 users.get('/friends/requests', verifyToken, getAllFriendRequests)
+users.get('/friends/info/chat-list', verifyToken, getFriendsForChatList)
 users.get('/profile/toggle-public', verifyToken, togglePublic)
 users.route('/profile/info').get(verifyToken, getProfileInfo).put(verifyToken, updateProfileInfo)
 users.put('/profile/info/username', verifyToken, updateUsername)
